@@ -8,13 +8,14 @@ pub mod msgs {
 
     #[cw_serde]
     pub struct InstantiateMsg {
-        pub owner: String,
+        pub owners: Vec<String>,
     }
 
     #[cw_serde]
     pub enum ExecuteMsg {
         RegisterVariable(RegisterVariableMsg),
         RemoveVariable(RemoveVariableMsg),
+        UpdateOwners(UpdateOwnerMsg),
     }
 
     #[cw_serde]
@@ -26,6 +27,12 @@ pub mod msgs {
     #[cw_serde]
     pub struct RemoveVariableMsg {
         pub key: String,
+    }
+
+    #[cw_serde]
+    pub struct UpdateOwnerMsg {
+        pub add: Option<Vec<String>>,
+        pub remove: Option<Vec<String>>,
     }
 
     #[cw_serde]
@@ -50,17 +57,30 @@ pub mod definitions {
 
     use cosmwasm_schema::cw_serde;
     use cosmwasm_std::{from_json, Addr, Binary, Decimal, Deps, StdError, StdResult, Uint128};
-    use rhaki_cw_plus::traits::AssertOwner;
     use serde::de::DeserializeOwned;
 
     #[cw_serde]
     pub struct Config {
-        pub owner: Addr,
+        pub owners: Vec<Addr>,
     }
 
-    impl AssertOwner for Config {
-        fn get_admin(&self) -> Addr {
-            self.owner.clone()
+    impl Config {
+        pub fn validate_owner(&self, address: &Addr) -> StdResult<()> {
+            if !self.owners.contains(address) {
+                return Err(StdError::generic_err(format!(
+                    "{} is not an owner",
+                    address
+                )));
+            }
+
+            Ok(())
+        }
+        pub fn validate(&self) -> StdResult<()> {
+            if self.owners.is_empty() {
+                return Err(StdError::generic_err("Invalid 0 owners. Needed at least 1"));
+            }
+
+            Ok(())
         }
     }
 

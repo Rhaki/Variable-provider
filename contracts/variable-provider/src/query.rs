@@ -1,7 +1,7 @@
 use std::collections::BTreeMap;
 
-use variable_provider_pkg::definitions::Variable;
 use cosmwasm_std::{Deps, StdError, StdResult};
+use variable_provider_pkg::definitions::Variable;
 
 use crate::state::VARIABLES;
 
