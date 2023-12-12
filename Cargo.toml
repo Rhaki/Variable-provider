@@ -2,7 +2,7 @@
 members             = ["package", "test", "contracts/variable-provider"]
 
 [workspace.package]
-version             = "0.2.0"
+version             = "0.2.1"
 edition             = "2021"
 authors             = ["Rhaki"]
 license             = "Apache-2.0"
@@ -16,4 +16,4 @@ schemars            = "0.8.10"
 serde               = { version = "1.0.145", default-features = false, features = ["derive"] }
 rhaki-cw-plus       = "0.6.8"
 thiserror           = "1.0.31"
-variable-provider-pkg = { path = "./package", version="0.2.0" }
+variable-provider-pkg = { path = "./package", version="0.2.1" }

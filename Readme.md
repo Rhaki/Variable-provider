@@ -17,7 +17,7 @@ This product is intended for protocols or services that need to share variables 
 
 Each protocol can initialize its own `Variable Provider` contract. The `variable-provider-pkg` provides convenient helper functions under the `helper` module to facilitate interactions within contracts using the Variable Provider.
 
-| Name | Crates.io | Description |
-|------|-----------|-------------|
-| Variable provider contract | [![cw1 on crates.io](https://img.shields.io/crates/v/variable-provider.svg)](https://crates.io/crates/variable-provider) | Contract definition
-| Variable provider pkg | [![cw1 on crates.io](https://img.shields.io/crates/v/variable-provider-pkg.svg)](https://crates.io/crates/variable-provider-pkg) | Package
+| Name                       | Crates.io                                                                                                                        | Description         |
+| -------------------------- | -------------------------------------------------------------------------------------------------------------------------------- | ------------------- |
+| Variable provider contract | [![cw1 on crates.io](https://img.shields.io/crates/v/variable-provider.svg)](https://crates.io/crates/variable-provider)         | Contract definition |
+| Variable provider pkg      | [![cw1 on crates.io](https://img.shields.io/crates/v/variable-provider-pkg.svg)](https://crates.io/crates/variable-provider-pkg) | Package             |
