@@ -1,0 +1,18 @@
+[package]
+name                = "variable-provider-pkg"
+description         = "variable provider package"
+license             = { workspace = true }
+version             = { workspace = true }
+authors             = { workspace = true }
+edition             = { workspace = true }
+
+[dependencies]
+cosmwasm-schema     = { workspace = true }
+cosmwasm-std        = { workspace = true }
+cw-storage-plus     = { workspace = true }
+schemars            = { workspace = true }
+serde               = { workspace = true }
+rhaki-cw-plus       = { workspace = true }
+
+
+
