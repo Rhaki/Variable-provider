@@ -181,29 +181,29 @@ pub mod definitions {
 pub mod helper {
     use std::collections::BTreeMap;
 
-    use cosmwasm_std::{Deps, QuerierWrapper, StdResult};
+    use cosmwasm_std::{QuerierWrapper, StdResult};
 
     use crate::definitions::Variable;
 
     use super::msgs::QueryMsg;
 
     pub fn variable_manager_get_variable(
-        querier: QuerierWrapper,
+        querier: &QuerierWrapper,
         key: impl Into<String>,
-        variable_manager_addr: impl Into<String>,
+        address_manager_addr: impl Into<String>,
     ) -> StdResult<Variable> {
         querier.query_wasm_smart(
-            variable_manager_addr,
+            address_manager_addr,
             &QueryMsg::GetVariable { key: key.into() },
         )
     }
 
     pub fn variable_manager_get_variables(
-        deps: Deps,
+        querier: &QuerierWrapper,
         keys: Vec<impl Into<String>>,
         address_manager_addr: impl Into<String>,
     ) -> StdResult<BTreeMap<String, Variable>> {
-        deps.querier.query_wasm_smart(
+        querier.query_wasm_smart(
             address_manager_addr,
             &QueryMsg::GetVariables {
                 keys: keys.into_iter().map(|val| val.into()).collect(),

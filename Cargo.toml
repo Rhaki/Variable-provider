@@ -2,7 +2,7 @@
 members             = ["package", "test", "contracts/variable-manager"]
 
 [workspace.package]
-version             = "1.0.0"
+version             = "1.0.1"
 edition             = "2021"
 authors             = ["Rhaki"]
 license             = "Apache-2.0"
@@ -16,4 +16,4 @@ schemars            = "0.8.10"
 serde               = { version = "1.0.145", default-features = false, features = ["derive"] }
 rhaki-cw-plus       = "0.6.8"
 thiserror           = "1.0.31"
-variable-manager-pkg = { path = "./package", version="1.0.0" }
+variable-manager-pkg = { path = "./package", version="1.0.1" }
