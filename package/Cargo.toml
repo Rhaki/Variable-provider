@@ -1,6 +1,6 @@
 [package]
-name                = "variable-provider-pkg"
-description         = "variable provider package"
+name                = "variable-manager-pkg"
+description         = "variable manager package"
 license             = { workspace = true }
 version             = { workspace = true }
 authors             = { workspace = true }

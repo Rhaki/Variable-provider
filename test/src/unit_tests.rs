@@ -4,7 +4,7 @@ use rhaki_cw_plus::{
     serde_value::{json, ToCwJson, Value},
     traits::{IntoAddr, IntoBinary},
 };
-use variable_provider_pkg::definitions::Variable;
+use variable_manager_pkg::definitions::Variable;
 
 #[test]
 #[rustfmt::skip]

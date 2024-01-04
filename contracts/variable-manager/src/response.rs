@@ -1,6 +1,6 @@
 use cosmwasm_std::{Addr, Response, StdError};
 use thiserror::Error;
-use variable_provider_pkg::definitions::Variable;
+use variable_manager_pkg::definitions::Variable;
 
 pub type ContractResponse = Result<Response, ContractError>;
 pub type ContractResult<T> = Result<T, ContractError>;

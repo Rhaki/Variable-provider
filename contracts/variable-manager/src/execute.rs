@@ -1,6 +1,6 @@
 use cosmwasm_std::{attr, Addr, Attribute, Deps, DepsMut, Response};
 use rhaki_cw_plus::traits::IntoAddr;
-use variable_provider_pkg::{
+use variable_manager_pkg::{
     definitions::Config,
     msgs::{RegisterVariableMsg, RemoveVariableMsg, UpdateOwnerMsg},
 };
@@ -23,9 +23,23 @@ pub fn run_register_variable(deps: DepsMut, msg: RegisterVariableMsg) -> Contrac
     VARIABLES.save(deps.storage, msg.key.clone(), &validate)?;
 
     Ok(Response::new()
-        .add_attribute("action", "register_address")
+        .add_attribute("action", "register_variable")
         .add_attribute("key", msg.key)
         .add_attribute("value", format!("{:?}", msg.value)))
+}
+
+pub fn run_register_variables(
+    mut deps: DepsMut,
+    msgs: Vec<RegisterVariableMsg>,
+) -> ContractResponse {
+    let mut attrs = vec![attr("action", "register_variable")];
+    for msg in msgs {
+        run_register_variable(deps.branch(), msg.clone())?;
+        attrs.push(attr("key", msg.key));
+        attrs.push(attr("value", format!("{:?}", msg.value)));
+    }
+
+    Ok(Response::new().add_attributes(attrs))
 }
 
 pub fn run_remove_variable(deps: DepsMut, msg: RemoveVariableMsg) -> ContractResponse {
@@ -34,7 +48,7 @@ pub fn run_remove_variable(deps: DepsMut, msg: RemoveVariableMsg) -> ContractRes
     VARIABLES.remove(deps.storage, msg.key.clone());
 
     Ok(Response::new()
-        .add_attribute("action", "remove_address")
+        .add_attribute("action", "remove_variable")
         .add_attribute("key", msg.key)
         .add_attribute("value", format!("{:?}", variable)))
 }

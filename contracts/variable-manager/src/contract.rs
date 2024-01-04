@@ -1,15 +1,16 @@
 use cosmwasm_std::{
     entry_point, Addr, Binary, Deps, DepsMut, Env, MessageInfo, Response, StdResult,
 };
-
 use rhaki_cw_plus::traits::{IntoAddr, IntoBinaryResult};
-use variable_provider_pkg::{
+use variable_manager_pkg::{
     definitions::Config,
     msgs::{ExecuteMsg, InstantiateMsg, MigrateMsg, QueryMsg},
 };
 
 use crate::{
-    execute::{run_register_variable, run_remove_variable, run_update_owner_msg},
+    execute::{
+        run_register_variable, run_register_variables, run_remove_variable, run_update_owner_msg,
+    },
     query::{qy_get_all_variables, qy_get_variable, qy_get_variables},
     response::ContractResponse,
     state::CONFIG,
@@ -41,6 +42,8 @@ pub fn execute(deps: DepsMut, _env: Env, info: MessageInfo, msg: ExecuteMsg) -> 
     CONFIG.load(deps.storage)?.validate_owner(&info.sender)?;
     match msg {
         ExecuteMsg::RegisterVariable(msg) => run_register_variable(deps, msg),
+        ExecuteMsg::RegisterVariables(msg) => run_register_variables(deps, msg),
+
         ExecuteMsg::RemoveVariable(msg) => run_remove_variable(deps, msg),
         ExecuteMsg::UpdateOwners(msg) => run_update_owner_msg(deps, msg),
     }

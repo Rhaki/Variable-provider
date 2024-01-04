@@ -14,6 +14,7 @@ pub mod msgs {
     #[cw_serde]
     pub enum ExecuteMsg {
         RegisterVariable(RegisterVariableMsg),
+        RegisterVariables(Vec<RegisterVariableMsg>),
         RemoveVariable(RemoveVariableMsg),
         UpdateOwners(UpdateOwnerMsg),
     }
@@ -22,6 +23,12 @@ pub mod msgs {
     pub struct RegisterVariableMsg {
         pub key: String,
         pub value: Variable,
+    }
+
+    impl RegisterVariableMsg {
+        pub fn new(key: String, value: Variable) -> Self {
+            Self { key, value }
+        }
     }
 
     #[cw_serde]
@@ -180,24 +187,24 @@ pub mod helper {
 
     use super::msgs::QueryMsg;
 
-    pub fn variable_provider_get_variable(
+    pub fn variable_manager_get_variable(
         querier: QuerierWrapper,
         key: impl Into<String>,
-        variable_provider_addr: impl Into<String>,
+        variable_manager_addr: impl Into<String>,
     ) -> StdResult<Variable> {
         querier.query_wasm_smart(
-            variable_provider_addr,
+            variable_manager_addr,
             &QueryMsg::GetVariable { key: key.into() },
         )
     }
 
-    pub fn variable_provider_get_variables(
+    pub fn variable_manager_get_variables(
         deps: Deps,
         keys: Vec<impl Into<String>>,
-        address_provider_addr: impl Into<String>,
+        address_manager_addr: impl Into<String>,
     ) -> StdResult<BTreeMap<String, Variable>> {
         deps.querier.query_wasm_smart(
-            address_provider_addr,
+            address_manager_addr,
             &QueryMsg::GetVariables {
                 keys: keys.into_iter().map(|val| val.into()).collect(),
             },

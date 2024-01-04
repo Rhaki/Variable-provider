@@ -1,6 +1,6 @@
 [package]
-name                = "variable-provider-test"
-description         = "variable provider test"
+name                = "variable-manager-test"
+description         = "variable manager test"
 license             = { workspace = true }
 version             = { workspace = true }
 authors             = { workspace = true }
@@ -14,7 +14,7 @@ schemars            = { workspace = true }
 serde               = { workspace = true }
 serde_json          = "1.0.108"
 rhaki-cw-plus       = { workspace = true }
-variable-provider-pkg = { workspace = true }
+variable-manager-pkg = { workspace = true }
 
 
 

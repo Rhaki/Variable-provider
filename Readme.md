@@ -1,6 +1,6 @@
-## Variable Provider
+## Variable manager
 
-`Variable Provider` is a `smart contract` designed to store variables of different types. It can be viewed as an `address provider`, but with the versatility of saving other data in addition to addresses. When registering a `variable`, a `key` must be provided in `String` format, while the `variable` to be stored is of type `Variable`. The `Variable` type is an enumerator that allows the following variants:
+`Variable manager` is a `smart contract` designed to store variables of different types. It can be viewed as an `address manager`, but with the versatility of saving other data in addition to addresses. When registering a `variable`, a `key` must be provided in `String` format, while the `variable` to be stored is of type `Variable`. The `Variable` type is an enumerator that allows the following variants:
 
 ```rust
 pub enum Variable {
@@ -15,9 +15,9 @@ pub enum Variable {
 
 This product is intended for protocols or services that need to share variables among their contracts.
 
-Each protocol can initialize its own `Variable Provider` contract. The `variable-provider-pkg` provides convenient helper functions under the `helper` module to facilitate interactions within contracts using the Variable Provider.
+Each protocol can initialize its own `Variable manager` contract. The `variable-manager-pkg` provides convenient helper functions under the `helper` module to facilitate interactions within contracts using the Variable manager.
 
 | Name                       | Crates.io                                                                                                                        | Description         |
 | -------------------------- | -------------------------------------------------------------------------------------------------------------------------------- | ------------------- |
-| Variable provider contract | [![cw1 on crates.io](https://img.shields.io/crates/v/variable-provider.svg)](https://crates.io/crates/variable-provider)         | Contract definition |
-| Variable provider pkg      | [![cw1 on crates.io](https://img.shields.io/crates/v/variable-provider-pkg.svg)](https://crates.io/crates/variable-provider-pkg) | Package             |
+| Variable manager contract | [![cw1 on crates.io](https://img.shields.io/crates/v/variable-manager.svg)](https://crates.io/crates/variable-manager)         | Contract definition |
+| Variable manager pkg      | [![cw1 on crates.io](https://img.shields.io/crates/v/variable-manager-pkg.svg)](https://crates.io/crates/variable-manager-pkg) | Package             |

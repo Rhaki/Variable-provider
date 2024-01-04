@@ -100,7 +100,7 @@ fn main() -> std::io::Result<()> {
     println!("Done");
 
     let contracts = vec![
-        "variable-provider",
+        "variable-manager",
     ];
 
     for contract in contracts {
