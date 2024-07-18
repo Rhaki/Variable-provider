@@ -10,6 +10,7 @@ use variable_manager_pkg::{
 use crate::{
     execute::{
         run_register_variable, run_register_variables, run_remove_variable, run_update_owner_msg,
+        run_update_variable, run_update_variables,
     },
     query::{qy_get_all_variables, qy_get_variable, qy_get_variables},
     response::ContractResponse,
@@ -42,10 +43,11 @@ pub fn execute(deps: DepsMut, _env: Env, info: MessageInfo, msg: ExecuteMsg) -> 
     CONFIG.load(deps.storage)?.validate_owner(&info.sender)?;
     match msg {
         ExecuteMsg::RegisterVariable(msg) => run_register_variable(deps, msg),
-        ExecuteMsg::RegisterVariables(msg) => run_register_variables(deps, msg),
-
+        ExecuteMsg::RegisterVariables(msgs) => run_register_variables(deps, msgs),
         ExecuteMsg::RemoveVariable(msg) => run_remove_variable(deps, msg),
         ExecuteMsg::UpdateOwners(msg) => run_update_owner_msg(deps, msg),
+        ExecuteMsg::UpdateVariable(msg) => run_update_variable(deps, msg),
+        ExecuteMsg::UpdateVariables(msgs) => run_update_variables(deps, msgs),
     }
 }
 

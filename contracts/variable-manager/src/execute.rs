@@ -25,7 +25,7 @@ pub fn run_register_variable(deps: DepsMut, msg: RegisterVariableMsg) -> Contrac
     Ok(Response::new()
         .add_attribute("action", "register_variable")
         .add_attribute("key", msg.key)
-        .add_attribute("value", format!("{:?}", msg.value)))
+        .add_attribute("value", format!("{}", msg.value)))
 }
 
 pub fn run_register_variables(
@@ -36,7 +36,34 @@ pub fn run_register_variables(
     for msg in msgs {
         run_register_variable(deps.branch(), msg.clone())?;
         attrs.push(attr("key", msg.key));
-        attrs.push(attr("value", format!("{:?}", msg.value)));
+        attrs.push(attr("value", format!("{}", msg.value)));
+    }
+
+    Ok(Response::new().add_attributes(attrs))
+}
+
+pub fn run_update_variable(deps: DepsMut, msg: RegisterVariableMsg) -> ContractResponse {
+    let validated = msg.value.clone().validate(deps.as_ref())?;
+
+    VARIABLES.update(deps.storage, msg.key.clone(), |val| -> ContractResult<_> {
+        val.ok_or(ContractError::KeyNotFound {
+            key: msg.key.clone(),
+        })?;
+        Ok(validated)
+    })?;
+
+    Ok(Response::new()
+        .add_attribute("action", "update_variable")
+        .add_attribute("key", msg.key)
+        .add_attribute("value", format!("{}", msg.value)))
+}
+
+pub fn run_update_variables(mut deps: DepsMut, msgs: Vec<RegisterVariableMsg>) -> ContractResponse {
+    let mut attrs = vec![attr("action", "update_variable")];
+    for msg in msgs {
+        run_update_variable(deps.branch(), msg.clone())?;
+        attrs.push(attr("key", msg.key));
+        attrs.push(attr("value", format!("{}", msg.value)));
     }
 
     Ok(Response::new().add_attributes(attrs))
@@ -50,7 +77,7 @@ pub fn run_remove_variable(deps: DepsMut, msg: RemoveVariableMsg) -> ContractRes
     Ok(Response::new()
         .add_attribute("action", "remove_variable")
         .add_attribute("key", msg.key)
-        .add_attribute("value", format!("{:?}", variable)))
+        .add_attribute("value", format!("{}", variable)))
 }
 
 pub fn run_update_owner_msg(deps: DepsMut, msg: UpdateOwnerMsg) -> ContractResponse {

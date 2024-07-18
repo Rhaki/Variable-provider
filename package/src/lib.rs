@@ -15,6 +15,8 @@ pub mod msgs {
     pub enum ExecuteMsg {
         RegisterVariable(RegisterVariableMsg),
         RegisterVariables(Vec<RegisterVariableMsg>),
+        UpdateVariable(RegisterVariableMsg),
+        UpdateVariables(Vec<RegisterVariableMsg>),
         RemoveVariable(RemoveVariableMsg),
         UpdateOwners(UpdateOwnerMsg),
     }
@@ -61,6 +63,8 @@ pub mod msgs {
 }
 
 pub mod definitions {
+
+    use std::fmt::Display;
 
     use cosmwasm_schema::cw_serde;
     use cosmwasm_std::{from_json, Addr, Binary, Decimal, Deps, StdError, StdResult, Uint128};
@@ -174,6 +178,19 @@ pub mod definitions {
             }
 
             Ok(self)
+        }
+    }
+
+    impl Display for Variable {
+        fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+            match self {
+                Variable::String(val) => write!(f, "String: {val}"),
+                Variable::Addr(val) => write!(f, "Addr: {val}"),
+                Variable::Uint128(val) => write!(f, "Uint128: {val}"),
+                Variable::U64(val) => write!(f, "u64: {val}"),
+                Variable::Decimal(val) => write!(f, "Decimal: {val}"),
+                Variable::Binary(val) => write!(f, "Binary: {val}"),
+            }
         }
     }
 }
