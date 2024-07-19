@@ -8,12 +8,12 @@ authors             = ["Rhaki"]
 license             = "Apache-2.0"
 
 [workspace.dependencies]
-cosmwasm-schema     = "1.5.0"
-cosmwasm-std        = "1.5.0"
-cw-storage-plus     = "1.2.0"
-cw-multi-test       = "0.20.0"
+cosmwasm-schema     = "1"
+cosmwasm-std        = "1"
+cw-storage-plus     = "1"
+cw-multi-test       = "0.20"
 schemars            = "0.8.10"
 serde               = { version = "1.0.145", default-features = false, features = ["derive"] }
-rhaki-cw-plus       = "0.6.8"
-thiserror           = "1.0.31"
+rhaki-cw-plus       = "2"
+thiserror           = "1"
 variable-manager-pkg = { path = "./package", version="1.0.1" }
