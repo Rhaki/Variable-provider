@@ -1,0 +1,2 @@
+a0d721cae115f5cef8f3231e4534ea85d384a970a215bd0dc72ae370a927d376  variable_manager-aarch64.wasm
+032aba676887f136a6feafe343e719caa7d6e17daa6689e6deeb114a674c351a  variable_manager.wasm

@@ -1,0 +1,1 @@
+c32c9177e4f8ab15f794e5378ad215a84f35121ce892aa58ccc35cd5d1347a9d  target/wasm32-unknown-unknown/release/variable_manager.wasm
