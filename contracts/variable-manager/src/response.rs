@@ -13,7 +13,7 @@ pub enum ContractError {
     #[error("Unauthorized")]
     Unauthorized {},
 
-    #[error("Key {key} alredy registered for address {value:?}")]
+    #[error("Key {key} already registered for address {value:?}")]
     KeyAlredyRegistered { key: String, value: Variable },
 
     #[error("Key not found: {key}")]

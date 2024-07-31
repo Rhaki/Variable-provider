@@ -59,6 +59,7 @@ pub fn query(deps: Deps, _env: Env, msg: QueryMsg) -> StdResult<Binary> {
         QueryMsg::AllVariables { start_after, limit } => {
             qy_get_all_variables(deps, start_after, limit).into_binary()
         }
+        QueryMsg::Config {} => CONFIG.load(deps.storage).into_binary(),
     }
 }
 

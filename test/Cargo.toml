@@ -7,14 +7,18 @@ authors             = { workspace = true }
 edition             = { workspace = true }
 
 [dependencies]
-cosmwasm-schema     = { workspace = true }
-cosmwasm-std        = { workspace = true }
-cw-storage-plus     = { workspace = true }
-schemars            = { workspace = true }
-serde               = { workspace = true }
-serde_json          = "1.0.108"
-rhaki-cw-plus       = { workspace = true }
+cosmwasm-schema      = { workspace = true }
+cosmwasm-std         = { workspace = true }
+cw-storage-plus      = { workspace = true }
+schemars             = { workspace = true }
+serde                = { workspace = true }
+serde_json           = { workspace = true }
+rhaki-cw-plus        = { workspace = true }
+variable-manager     = { workspace = true }
 variable-manager-pkg = { workspace = true }
+
+[dev-dependencies]
+rhaki-cw-plus        = { workspace = true, features = ["multi-test"] }
 
 
 

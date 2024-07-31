@@ -70,7 +70,12 @@ pub fn run_update_variables(mut deps: DepsMut, msgs: Vec<RegisterVariableMsg>) -
 }
 
 pub fn run_remove_variable(deps: DepsMut, msg: RemoveVariableMsg) -> ContractResponse {
-    let variable = VARIABLES.load(deps.storage, msg.key.clone())?;
+    let variable =
+        VARIABLES
+            .load(deps.storage, msg.key.clone())
+            .map_err(|_| ContractError::KeyNotFound {
+                key: msg.key.to_string(),
+            })?;
 
     VARIABLES.remove(deps.storage, msg.key.clone());
 
@@ -147,12 +152,7 @@ fn remove_owners(
         })
         .collect::<ContractResult<Vec<Addr>>>()?;
 
-    config.owners = config
-        .owners
-        .clone()
-        .into_iter()
-        .filter(|val| !addresses.contains(val))
-        .collect();
+    config.owners.retain_mut(|addr| !addresses.contains(addr));
 
     Ok(attrs)
 }

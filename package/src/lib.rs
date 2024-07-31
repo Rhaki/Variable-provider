@@ -4,6 +4,8 @@ pub mod msgs {
     use cosmwasm_schema::{cw_serde, QueryResponses};
     use cosmwasm_std::Addr;
 
+    use crate::definitions::Config;
+
     use super::definitions::Variable;
 
     #[cw_serde]
@@ -56,6 +58,8 @@ pub mod msgs {
             start_after: Option<String>,
             limit: Option<u32>,
         },
+        #[returns(Config)]
+        Config {},
     }
 
     #[cw_serde]
